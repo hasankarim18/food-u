@@ -1,11 +1,12 @@
-
+import MainComponent from './components/MainComponent';
 import './App.css';
+import React from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Restaurent project starter</h1>
-    </div>
+    <React.Fragment>
+      <MainComponent />
+    </React.Fragment>
   );
 }
 
