@@ -8,3 +8,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     2. npm install reactstrap@9.1.1 for component
     3. npm install react-popper@2.3.0
     4. npm i dateformat 
+#### Commit 3/2 Component tree created 
