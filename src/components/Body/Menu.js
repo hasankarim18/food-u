@@ -8,7 +8,7 @@ export class Menu extends Component {
     }
     render() {
         const menu = this.state.dishes.map(item => {
-            console.log(item)
+
             return (
                 <MenuItem dish={item} key={item.id} />
             )
@@ -20,6 +20,7 @@ export class Menu extends Component {
             >
                 <div className="row">
                     <div className="col-6">
+                        {menu}
                         {menu}
                     </div>
                 </div>

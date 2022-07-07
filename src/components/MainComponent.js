@@ -5,7 +5,7 @@ import Footer from './Footer/Footer'
 
 const MainComponent = (props) => {
     return (
-        <div>
+        <div style={{ marginBottom: "50px" }} >
             <Header />
             <Body />
             <Footer />

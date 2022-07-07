@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import classes from './Navigation.css'
 import {
     Collapse,
     Navbar,
@@ -16,17 +17,60 @@ export default class Example extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isSticky: false
         };
     }
+
+    stickyHandler = () => {
+        const header = document.querySelector('.main_header')
+        const scrollTop = window.scrollY
+
+        console.log(scrollTop)
+
+        if (scrollTop >= 100) {
+            this.setState({
+                isSticky: true
+            })
+            console.log('sticky handler')
+            header.classList.add('is-sticky')
+            header.classList.remove('non-sticky')
+        } else {
+
+            this.setState({
+                isSticky: false
+            })
+            header.classList.remove('is-sticky')
+            header.classList.add('non-sticky')
+        }
+        //  return scrollTop >= 150 ?  : 
+
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.stickyHandler)
+        //   Window.addEventListener('scroll', this.stickyHandler)
+
+    }
+
+    componentDidUpdate() {
+
+    }
+
+
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
+
     render() {
+
+
         return (
-            <div className="bg-dark" >
+            <div className="bg-dark main_header" >
                 <Navbar className="container" color="dark" dark expand="md">
                     <NavbarBrand href="/">Food U</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
