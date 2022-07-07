@@ -26,13 +26,13 @@ export default class Example extends React.Component {
         const header = document.querySelector('.main_header')
         const scrollTop = window.scrollY
 
-        console.log(scrollTop)
+
 
         if (scrollTop >= 100) {
             this.setState({
                 isSticky: true
             })
-            console.log('sticky handler')
+
             header.classList.add('is-sticky')
             header.classList.remove('non-sticky')
         } else {
