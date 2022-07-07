@@ -1,0 +1,12 @@
+.map-comments {
+    border-bottom: 1px solid salmon;
+    padding-top: 10px;
+}
+
+.load-comments h3 {
+    color: salmon;
+}
+
+.map-comments:last-child {
+    border-bottom: 1px solid transparent;
+}
