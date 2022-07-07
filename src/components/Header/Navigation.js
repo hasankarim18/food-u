@@ -7,9 +7,10 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
+
 
 } from 'reactstrap';
+import { NavLink } from 'react-router-dom'
 
 export default class Example extends React.Component {
     constructor(props) {
@@ -43,21 +44,13 @@ export default class Example extends React.Component {
             header.classList.remove('is-sticky')
             header.classList.add('non-sticky')
         }
-        //  return scrollTop >= 150 ?  : 
 
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.stickyHandler)
-        //   Window.addEventListener('scroll', this.stickyHandler)
 
     }
-
-    componentDidUpdate() {
-
-    }
-
-
 
     toggle() {
         this.setState({
@@ -67,8 +60,6 @@ export default class Example extends React.Component {
 
 
     render() {
-
-
         return (
             <div className="bg-dark main_header" >
                 <Navbar className="container" color="dark" dark expand="md">
@@ -77,10 +68,16 @@ export default class Example extends React.Component {
                     <Collapse className="justify-content-end" isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                                <NavLink className="nav-link" to="/home">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                <NavLink className="nav-link" to="/menu">Menu</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/about">About</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
