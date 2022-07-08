@@ -9,7 +9,6 @@ const MainComponent = (props) => {
         <div style={{ marginBottom: "50px" }} >
             <Header />
             <Body />
-
             <Footer />
         </div>
     )

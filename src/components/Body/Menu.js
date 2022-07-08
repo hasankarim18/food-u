@@ -44,6 +44,7 @@ export class Menu extends Component {
         return (
             <div className="row pt-2">
                 {menu}
+                {menu}
                 {this.state.showDishDetail ? dishDetail : ''}
             </div>
 
