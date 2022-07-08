@@ -5,7 +5,7 @@ import MyModal from '../../UI/MyModal'
 import { Button } from 'reactstrap'
 
 const DishDetail = (props) => {
-    console.log(props)
+
     return (
         <MyModal onClose={props.onClose} >
             <Card style={{ marginTop: "20px" }} >
