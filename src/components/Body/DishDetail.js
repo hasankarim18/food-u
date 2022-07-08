@@ -5,7 +5,7 @@ import MyModal from '../../UI/MyModal'
 import { Button } from 'reactstrap'
 
 const DishDetail = (props) => {
-
+    console.log(props)
     return (
         <MyModal onClose={props.onClose} >
             <Card style={{ marginTop: "20px" }} >
@@ -26,7 +26,7 @@ const DishDetail = (props) => {
                     </h5>
                 </CardBody>
                 <hr />
-                <LoadComments comments={props.dish.comments} />
+                <LoadComments comments={props.comments} />
             </Card>
             <CardBody className="d-flex justify-content-end" >
                 <Button className="btn-danger" onClick={props.onClose} > Close </Button>

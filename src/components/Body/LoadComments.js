@@ -19,6 +19,14 @@ const LoadComments = (props) => {
                                 Rating: {item.rating}
                             </h6>
                             <p><strong>Publish Date:</strong> {dateFormat(item.date, "d-mmm-yyyy")} </p>
+                            <div className="d-flex justify-content-between">
+                                <span>
+                                    <strong>DishId: </strong> {item.dishId}
+                                </span>
+                                <span>
+                                    <strong>CommentId: </strong> {item.id}
+                                </span>
+                            </div>
                         </div>
                     )
                 })
