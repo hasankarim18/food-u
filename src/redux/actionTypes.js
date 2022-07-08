@@ -1,0 +1,3 @@
+
+
+export const HEADING_CHANGE = 'HEADING_CHANGE'
