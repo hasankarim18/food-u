@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
-import DISHES from '../../data/dishes'
-import COMMENTS from '../../data/comments'
 import MenuItem from './MenuItem'
 import DishDetail from './DishDetail'
+import { connect } from 'react-redux/es/exports'
+
+const mapStateToProps = state => {
+    return {
+        dishes: state.dishes,
+        comments: state.comments
+    }
+}
 
 export class Menu extends Component {
     state = {
-        dishes: DISHES,
-        comments: COMMENTS,
         selectedDish: null,
         showDishDetail: false,
         selectedComments: null
     }
 
     onDishSelect = dishid => {
-        const dishes = [...this.state.dishes]
-        const comments = [...this.state.comments]
+        const dishes = [...this.props.dishes]
+
+        const comments = [...this.props.comments]
         const dish = dishes.filter(item => {
             return item.id === dishid
         })
@@ -37,8 +42,12 @@ export class Menu extends Component {
         })
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
-        const menu = this.state.dishes.map(item => {
+        const menu = this.props.dishes.map(item => {
             return (
                 <MenuItem
                     onDishSelect={() => this.onDishSelect(item.id)}
@@ -69,4 +78,4 @@ export class Menu extends Component {
     }
 }
 
-export default Menu
+export default connect(mapStateToProps)(Menu)

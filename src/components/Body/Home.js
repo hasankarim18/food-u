@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+
+    return {
+        dishes: state.dishes,
+    }
+}
 
 export class Home extends Component {
+
+
+    componentDidMount() {
+        // console.log('Home State', this.state)
+        // console.log('Home props', this.props)
+    }
     render() {
         return (
             <div>
@@ -10,4 +24,4 @@ export class Home extends Component {
     }
 }
 
-export default Home
+export default connect(mapStateToProps)(Home)
