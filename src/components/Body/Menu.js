@@ -6,20 +6,25 @@ import DishDetail from './DishDetail'
 export class Menu extends Component {
     state = {
         dishes: DISHES,
-        selectedDish: null
+        selectedDish: null,
+        showDishDetail: false
     }
 
     onDishSelect = dish => {
-
         this.setState({
-            selectedDish: dish
+            selectedDish: dish,
+            showDishDetail: true
         })
     }
 
+    onCloseDishDetail = () => {
+        this.setState({
+            showDishDetail: false
+        })
+    }
 
     render() {
         const menu = this.state.dishes.map(item => {
-
             return (
                 <MenuItem
                     onDishSelect={() => this.onDishSelect(item)}
@@ -30,22 +35,18 @@ export class Menu extends Component {
         let dishDetail = <div></div>
 
         if (this.state.selectedDish != null) {
-            dishDetail = < DishDetail dish={this.state.selectedDish} />
+            dishDetail = < DishDetail
+                onClose={this.onCloseDishDetail.bind(this)}
+                dish={this.state.selectedDish}
+            />
         }
 
         return (
-            <div
-                className="container"
-            >
-                <div className="row">
-                    <div className="col-6">
-                        {menu}
-                    </div>
-                    <div className="col-6">
-                        {dishDetail}
-                    </div>
-                </div>
+            <div className="row pt-2">
+                {menu}
+                {this.state.showDishDetail ? dishDetail : ''}
             </div>
+
         )
     }
 }

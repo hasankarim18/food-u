@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import classes from './Navigation.css'
+import React from 'react';
+
 import {
     Collapse,
     Navbar,
@@ -11,6 +11,7 @@ import {
 
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom'
+import './Navigation.css'
 
 export default class Example extends React.Component {
     constructor(props) {
