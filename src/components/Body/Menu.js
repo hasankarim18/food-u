@@ -11,6 +11,7 @@ const mapStateToProps = state => {
 }
 
 export class Menu extends Component {
+
     state = {
         selectedDish: null,
         showDishDetail: false,
@@ -43,7 +44,7 @@ export class Menu extends Component {
     }
 
     componentDidMount() {
-
+        console.log('menu', this.props)
     }
 
     render() {
@@ -70,7 +71,7 @@ export class Menu extends Component {
         return (
             <div className="row pt-2">
                 {menu}
-                {menu}
+
                 {this.state.showDishDetail ? dishDetail : ''}
             </div>
 

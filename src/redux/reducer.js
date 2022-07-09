@@ -17,12 +17,17 @@ const Reducer = (state = initialStae, action) => {
                 homeTitle: state.homeTitle + action.payload
             }
         case actions.NEW_COMMENT:
-            const comment = action.payload
+            let comment = action.payload
             comment.id = state.comments.length + 1
-            console.log(comment)
+
+            let allComments = [...state.comments]
+            console.log('allcomment', allComments)
+            console.log('comment', comment)
+            let totalComment = allComments.concat(comment)
+            console.log('totalcomment: ', totalComment)
             return {
                 ...state,
-                comments: state.comments.concat(comment)
+                comments: totalComment
             }
         default:
             return state
