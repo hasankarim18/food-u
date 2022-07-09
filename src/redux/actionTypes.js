@@ -1,3 +1,5 @@
 
 
 export const HEADING_CHANGE = 'HEADING_CHANGE'
+
+export const NEW_COMMENT = 'NEW_COMMENT'

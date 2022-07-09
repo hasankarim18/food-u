@@ -34,7 +34,7 @@ const DishDetail = (props) => {
             </CardBody>
             <CardBody>
                 <h2>Give your comment</h2>
-                <CommentForm />
+                <CommentForm dishId={props.dish.id} />
             </CardBody>
         </MyModal>
     )

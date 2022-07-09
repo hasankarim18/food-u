@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import { Form, Button, Input } from 'reactstrap'
+import { connect } from 'react-redux'
+import * as actions from '../../redux/actionTypes'
 
 export class CommentForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            author: '',
-            rating: '',
-            comment: ''
+            newComment: {
+                author: '',
+                rating: '',
+                comment: ''
+            }
         }
 
         this.onSubmitHandler = this.onSubmitHandler.bind(this)
@@ -16,18 +20,31 @@ export class CommentForm extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault()
-        console.log(this.state)
-        this.setState({
-            author: '',
-            rating: '',
-            comment: ''
+        let comment = this.state.newComment
+
+        comment.dishId = this.props.dishId
+        comment.date = new Date().toISOString()
+
+        this.props.dispatch({
+            type: actions.NEW_COMMENT,
+            payload: comment
         })
+
+        //   console.log(comment)
+
     }
 
     onChangeHandler = event => {
         this.setState({
-            [event.target.name]: event.target.value
+            newComment: {
+                ...this.state.newComment,
+                [event.target.name]: event.target.value
+            }
         })
+    }
+
+    componentDidMount() {
+        console.log(this.props)
     }
 
     render() {
@@ -70,4 +87,4 @@ export class CommentForm extends Component {
     }
 }
 
-export default CommentForm
+export default connect()(CommentForm)
