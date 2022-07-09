@@ -15,25 +15,20 @@ export class Menu extends Component {
     state = {
         selectedDish: null,
         showDishDetail: false,
-        selectedComments: null
+
     }
 
     onDishSelect = dishid => {
         const dishes = [...this.props.dishes]
 
-        const comments = [...this.props.comments]
         const dish = dishes.filter(item => {
             return item.id === dishid
-        })
-
-        const selectedComments = comments.filter(item => {
-            return item.dishId === dishid
         })
 
         this.setState({
             selectedDish: dish[0],
             showDishDetail: true,
-            selectedComments: selectedComments
+
         })
     }
 
@@ -59,10 +54,16 @@ export class Menu extends Component {
         let dishDetail = <div></div>
 
         if (this.state.selectedDish != null) {
+
+            let selectedComments = this.props.comments.filter(item => {
+                return item.dishId === this.state.selectedDish.id
+            })
+
+
             dishDetail = < DishDetail
                 onClose={this.onCloseDishDetail.bind(this)}
                 dish={this.state.selectedDish}
-                comments={this.state.selectedComments}
+                comments={selectedComments}
             />
         }
 
