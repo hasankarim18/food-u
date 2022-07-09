@@ -1,14 +1,5 @@
 import React, { Component } from 'react'
 import { Form, Button, Input } from 'reactstrap'
-import { connect } from 'react-redux'
-import * as actions from '../../redux/actionTypes'
-import { addComment } from '../../redux/actionCreators'
-
-const mapDispatchToProps = dispatch => {
-    return {
-        addComment: (comment) => dispatch(addComment(comment))
-    }
-}
 
 
 export class CommentForm extends Component {
@@ -32,11 +23,6 @@ export class CommentForm extends Component {
 
         comment.dishId = this.props.dishId
         comment.date = new Date().toISOString()
-
-        // this.props.dispatch({
-        //     type: actions.NEW_COMMENT,
-        //     payload: comment
-        // })
 
         this.props.addComment(comment)
 
@@ -103,5 +89,5 @@ export class CommentForm extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CommentForm)
+export default CommentForm
 // export default connect()(CommentForm)

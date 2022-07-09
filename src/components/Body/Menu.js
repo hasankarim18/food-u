@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import MenuItem from './MenuItem'
 import DishDetail from './DishDetail'
 import { connect } from 'react-redux/es/exports'
+import { addComment } from '../../redux/actionCreators'
+import * as actions from '../../redux/actionTypes'
 
 const mapStateToProps = state => {
     return {
@@ -9,6 +11,16 @@ const mapStateToProps = state => {
         comments: state.comments
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addComment: (comment) => dispatch({
+            type: actions.NEW_COMMENT,
+            payload: comment
+        })
+    }
+}
+
 
 export class Menu extends Component {
 
@@ -39,7 +51,7 @@ export class Menu extends Component {
     }
 
     componentDidMount() {
-        console.log('menu', this.props)
+
     }
 
     render() {
@@ -64,6 +76,7 @@ export class Menu extends Component {
                 onClose={this.onCloseDishDetail.bind(this)}
                 dish={this.state.selectedDish}
                 comments={selectedComments}
+                addComment={this.props.addComment}
             />
         }
 
@@ -80,4 +93,4 @@ export class Menu extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Menu)
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)
