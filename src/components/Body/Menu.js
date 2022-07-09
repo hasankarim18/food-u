@@ -3,7 +3,7 @@ import MenuItem from './MenuItem'
 import DishDetail from './DishDetail'
 import Loading from './Loading'
 import { connect } from 'react-redux/es/exports'
-import { addComment, fetchDishes, fetchComments } from '../../redux/actionCreators'
+import { addComment, fetchDishes, fetchComments, loadSelectedCommentsId } from '../../redux/actionCreators'
 
 
 const mapStateToProps = state => {
@@ -20,8 +20,9 @@ const mapDispatchToProps = dispatch => {
     return {
         addComment: (comment) => dispatch(addComment(comment)),
         fetchDishes: () => dispatch(fetchDishes()),
+        // fetchComments: (dishId) => dispatch(fetchComments(dishId)),
         fetchComments: () => dispatch(fetchComments()),
-
+        loadSelectedCommentsId: (dishId) => dispatch(loadSelectedCommentsId(dishId))
 
     }
 }
@@ -37,6 +38,7 @@ export class Menu extends Component {
 
     onDishSelect = dishid => {
         const dishes = [...this.props.dishes]
+        //  this.props.loadSelectedCommentsId(dishid)
 
         const dish = dishes.filter(item => {
             return item.id === dishid
@@ -86,6 +88,7 @@ export class Menu extends Component {
             let selectedComments = this.props.comments.filter(item => {
                 return item.dishId === this.state.selectedDish.id
             })
+            //  let selectedComments = this.props.comments
 
             dishDetail = < DishDetail
                 onClose={this.onCloseDishDetail.bind(this)}

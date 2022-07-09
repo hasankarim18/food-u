@@ -36,6 +36,7 @@ const DishDetail = (props) => {
                     <h5 className="pt-2" >
                         Price: {props.dish.price}/- BDT
                     </h5>
+                    <h6>DishId : {props.dish.id} </h6>
                 </CardBody>
                 <hr />
                 {

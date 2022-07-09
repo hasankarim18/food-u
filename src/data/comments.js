@@ -163,4 +163,13 @@ const COMMENTS =
 
     ];
 
+
+export const selectedCommentsFromDatabase = (dishId) => {
+    let selectedComments = COMMENTS.filter(item => {
+        return item.dishId === dishId
+    })
+    return selectedComments
+
+}
+
 export default COMMENTS;

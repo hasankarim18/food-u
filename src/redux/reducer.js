@@ -1,5 +1,5 @@
 
-
+import { selectedCommentsFromDatabase as fetchSelectedComments } from '../data/comments'
 import * as actions from './actionTypes'
 import { combineReducers } from 'redux'
 
@@ -19,13 +19,22 @@ const dishState = {
 const commentReducer = (state = commentState, action) => {
     // console.log(action)
     switch (action.type) {
-
         // commentisLoading 
         case actions.COMMENT_LOADING:
             return {
                 ...state,
                 commentIsLoading: true
             }
+        // select 
+        case actions.SELECTED_COMMENT:
+            let selectedComments = fetchSelectedComments(action.payload)
+            console.log(selectedComments)
+            return {
+                ...state,
+                commentIsLoading: false,
+                comments: selectedComments
+            }
+
         case actions.LOAD_COMMENTS:
             return {
                 ...state,

@@ -1,6 +1,7 @@
 import * as actions from './actionTypes'
 import DISHES from '../data/dishes'
 import COMMENTS from '../data/comments'
+import { selectedCommentsFromDatabase as seletedComments } from '../data/comments'
 
 
 
@@ -26,7 +27,7 @@ export const fetchDishes = () => {
 
         setTimeout(() => {
             dispatch(loadDishes(DISHES))
-        }, 2000);
+        }, 500);
 
     }
 }
@@ -47,12 +48,21 @@ const commentsLoading = () => {
     }
 }
 
+export const loadSelectedCommentsId = dishId => {
+    return {
+        type: actions.SELECTED_COMMENT,
+        payload: dishId
+    }
+}
+
 export const fetchComments = () => {
     return dispatch => {
         dispatch(commentsLoading())
 
+
         setTimeout(() => {
             dispatch(loadComments(COMMENTS))
+            //  dispatch(loadSelectedCommentsId(dishId))
         }, 2000);
     }
 }
