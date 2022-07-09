@@ -7,8 +7,8 @@ import * as actions from '../../redux/actionTypes'
 
 const mapStateToProps = state => {
     return {
-        dishes: state.dishes,
-        comments: state.comments
+        dishes: state.dishes.dishes,
+        comments: state.comments.comments
     }
 }
 
