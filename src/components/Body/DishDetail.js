@@ -3,6 +3,7 @@ import { Card, CardImg, CardBody } from 'reactstrap'
 import LoadComments from './LoadComments'
 import MyModal from '../../UI/MyModal'
 import { Button } from 'reactstrap'
+import CommentForm from './CommentForm'
 
 const DishDetail = (props) => {
 
@@ -30,6 +31,10 @@ const DishDetail = (props) => {
             </Card>
             <CardBody className="d-flex justify-content-end" >
                 <Button className="btn-danger" onClick={props.onClose} > Close </Button>
+            </CardBody>
+            <CardBody>
+                <h2>Give your comment</h2>
+                <CommentForm />
             </CardBody>
         </MyModal>
     )

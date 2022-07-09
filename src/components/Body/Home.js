@@ -48,7 +48,7 @@ export class Home extends Component {
                 }
 
                 <div>
-                    <Button onClick={this.changeTitle}>
+                    <Button disabled={this.state.isTitleAdded} onClick={this.changeTitle}>
                         Change Title
                     </Button>
                 </div>
