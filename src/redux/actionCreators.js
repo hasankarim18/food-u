@@ -1,7 +1,9 @@
 import * as actions from './actionTypes'
 import DISHES from '../data/dishes'
 import COMMENTS from '../data/comments'
-import { selectedCommentsFromDatabase as seletedComments } from '../data/comments'
+import axios from 'axios'
+
+import * as url from './urls'
 
 
 
@@ -25,10 +27,14 @@ export const fetchDishes = () => {
     return dispatch => {
         dispatch(dishLoading())
 
-        setTimeout(() => {
-            dispatch(loadDishes(DISHES))
-        }, 500);
-
+        axios.get(url.dishesGit)
+            .then(res => {
+                if (res.status === 200) {
+                    dispatch(loadDishes(res.data))
+                }
+                console.log(res.status)
+            })
+            .catch(err => console.log(err))
     }
 }
 

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Card, CardImg, CardImgOverlay, CardBody, CardTitle } from 'reactstrap'
+import * as url from '../../redux/urls'
 
 const MenuItem = (props) => {
     //  console.log(props)
     //  console.log(process.env.PUBLIC_URL)
-    const imageLink = process.env.PUBLIC_URL + '/' + props.dish.image
+    const imageLink = props.dish.image
+
     return (
         <div className="col-12 col-sm-6 col-md-4 mb-2" style={{ margin: "0px", cursor: "pointer", textAlign: 'center' }} >
             <Card

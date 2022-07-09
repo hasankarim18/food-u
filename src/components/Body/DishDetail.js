@@ -24,7 +24,7 @@ const DishDetail = (props) => {
                 <CardBody>
                     <div className="row" >
                         <div className="col-sm-5 col-12 pb-2" >
-                            <CardImg src={process.env.PUBLIC_URL + '/' + props.dish.image} alt={props.dish.name} />
+                            <CardImg src={props.dish.image} alt={props.dish.name} />
                         </div>
                         <div className="col-sm-7 col-12">
                             <h1>{props.dish.name}</h1>
