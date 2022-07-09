@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import MenuItem from './MenuItem'
 import DishDetail from './DishDetail'
+import Loading from './Loading'
 import { connect } from 'react-redux/es/exports'
-import { addComment } from '../../redux/actionCreators'
-import * as actions from '../../redux/actionTypes'
+import { addComment, fetchDishes, fetchComments } from '../../redux/actionCreators'
+
 
 const mapStateToProps = state => {
+
     return {
         dishes: state.dishes.dishes,
-        comments: state.comments.comments
+        comments: state.comments.comments,
+        dishIsLaoding: state.dishes.dishIsLaoding,
+        commentIsLoading: state.comments.commentIsLoading,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addComment: (comment) => dispatch({
-            type: actions.NEW_COMMENT,
-            payload: comment
-        })
+        addComment: (comment) => dispatch(addComment(comment)),
+        fetchDishes: () => dispatch(fetchDishes()),
+        fetchComments: () => dispatch(fetchComments()),
+
+
     }
 }
 
@@ -42,6 +47,8 @@ export class Menu extends Component {
             showDishDetail: true,
 
         })
+        this.props.fetchComments()
+
     }
 
     onCloseDishDetail = () => {
@@ -51,17 +58,26 @@ export class Menu extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchDishes()
 
     }
 
+
     render() {
-        const menu = this.props.dishes.map(item => {
-            return (
-                <MenuItem
-                    onDishSelect={() => this.onDishSelect(item.id)}
-                    dish={item} key={item.id} />
-            )
-        })
+        let menu = null
+
+        if (this.props.dishIsLaoding === true) {
+            menu = <Loading />
+        } else if (this.props.dishIsLaoding === false) {
+            menu = this.props.dishes.map(item => {
+                return (
+                    <MenuItem
+                        onDishSelect={() => this.onDishSelect(item.id)}
+                        dish={item} key={item.id} />
+                )
+            })
+        }
+
 
         let dishDetail = <div></div>
 
@@ -71,12 +87,12 @@ export class Menu extends Component {
                 return item.dishId === this.state.selectedDish.id
             })
 
-
             dishDetail = < DishDetail
                 onClose={this.onCloseDishDetail.bind(this)}
                 dish={this.state.selectedDish}
                 comments={selectedComments}
                 addComment={this.props.addComment}
+                commentIsLoading={this.props.commentIsLoading}
             />
         }
 
@@ -84,6 +100,7 @@ export class Menu extends Component {
 
         return (
             <div className="row pt-2">
+
                 {menu}
 
                 {this.state.showDishDetail ? dishDetail : ''}

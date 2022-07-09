@@ -4,8 +4,19 @@ import LoadComments from './LoadComments'
 import MyModal from '../../UI/MyModal'
 import { Button } from 'reactstrap'
 import CommentForm from './CommentForm'
+import Loading from './Loading'
 
 const DishDetail = (props) => {
+
+
+    let showComments = null
+
+    if (props.commentIsLoading === true) {
+        showComments = <Loading />
+    } else if (props.commentIsLoading === false) {
+        showComments = <LoadComments comments={props.comments} />
+    }
+
 
     return (
         <MyModal onClose={props.onClose} >
@@ -27,7 +38,10 @@ const DishDetail = (props) => {
                     </h5>
                 </CardBody>
                 <hr />
-                <LoadComments comments={props.comments} />
+                {
+                    showComments
+                }
+
             </Card>
             <CardBody className="d-flex justify-content-end" >
                 <Button className="btn-danger" onClick={props.onClose} > Close </Button>
