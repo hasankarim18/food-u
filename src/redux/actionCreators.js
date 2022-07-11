@@ -1,6 +1,4 @@
 import * as actions from './actionTypes'
-import DISHES from '../data/dishes'
-import COMMENTS from '../data/comments'
 import axios from 'axios'
 
 import * as url from './urls'
@@ -66,10 +64,13 @@ export const fetchComments = () => {
         dispatch(commentsLoading())
 
 
-        setTimeout(() => {
-            dispatch(loadComments(COMMENTS))
-            //  dispatch(loadSelectedCommentsId(dishId))
-        }, 2000);
+        axios.get(url.commentsGit)
+            .then(res => {
+                dispatch(loadComments(res.data))
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 }
 
