@@ -1,13 +1,16 @@
 import React from 'react'
 import Loading from './Loading'
+import Caurosel from '../UI/Caurosel'
+import { CauroselData } from '../UI/CauroselData'
+
+
 
 const Home = () => {
     return (
-        <div>Home
+        <div style={{ paddingTop: "60px" }} >
 
-            <div>
-                <Loading />
-            </div>
+            <Caurosel slides={CauroselData} />
+
         </div>
     )
 }
