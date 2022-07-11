@@ -44,7 +44,7 @@ const commentReducer = (state = commentState, action) => {
             }
         case actions.NEW_COMMENT:
             let comment = action.payload
-            comment.id = state.comments.length + 1
+            comment.date = new Date().toDateString()
             let allComments = [...state.comments]
             let totalComment = allComments.concat(comment)
 

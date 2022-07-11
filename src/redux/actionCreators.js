@@ -30,7 +30,7 @@ export const fetchDishes = () => {
                 if (res.status === 200) {
                     dispatch(loadDishes(res.data))
                 }
-                console.log(res.status)
+
             })
             .catch(err => console.log(err))
     }
@@ -64,7 +64,7 @@ export const fetchComments = () => {
         dispatch(commentsLoading())
 
 
-        axios.get(url.commentsGit)
+        axios.get(url.comments)
             .then(res => {
                 dispatch(loadComments(res.data))
             })
@@ -75,9 +75,23 @@ export const fetchComments = () => {
 }
 
 
-export const addComment = comment => {
+const commentConcat = comment => {
     return {
         type: actions.NEW_COMMENT,
         payload: comment
     }
+}
+
+export const addComment = (comment) => dispatch => {
+
+    axios.post(url.comments, comment)
+        .then(res => res.data)
+        .then(data => {
+            dispatch(commentConcat(data))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
 }
