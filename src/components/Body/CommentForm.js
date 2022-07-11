@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
-import { Form, Button, Input } from 'reactstrap'
+import { Form, Button, Input, Alert } from 'reactstrap'
 import axios from 'axios'
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+    //  console.log(state)
+    return {
+        newCommentFailed: state.comments.newCommentFailed
+    }
+}
 
 
 export class CommentForm extends Component {
@@ -47,10 +55,11 @@ export class CommentForm extends Component {
     }
 
     componentDidMount() {
-        // console.log(this.props)
+
     }
 
     render() {
+
         return (
             <div>
                 <Form onSubmit={this.onSubmitHandler} >
@@ -85,10 +94,15 @@ export class CommentForm extends Component {
                     <br />
                     <Button className="btn-success" type='submit' >Submit Comment</Button>
                 </Form>
+                {
+                    this.props.newCommentFailed ?
+                        <Alert color="danger" ><h1>Submit failed</h1> </Alert>
+                        : ''
+                }
             </div>
         )
     }
 }
 
-export default CommentForm
+export default connect(mapStateToProps)(CommentForm)
 // export default connect()(CommentForm)

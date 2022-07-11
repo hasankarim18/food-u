@@ -1,6 +1,12 @@
 import React from 'react'
-import { Card, CardImg, CardImgOverlay, CardBody, CardTitle } from 'reactstrap'
-import * as url from '../../redux/urls'
+import { Card, CardImg, CardImgOverlay, CardBody, CardTitle, Alert } from 'reactstrap'
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+    return {
+
+    }
+}
 
 const MenuItem = (props) => {
     //  console.log(props)
@@ -9,6 +15,7 @@ const MenuItem = (props) => {
 
     return (
         <div className="col-12 col-sm-6 col-md-4 mb-2" style={{ margin: "0px", cursor: "pointer", textAlign: 'center' }} >
+
             <Card
                 //onClick={() => props.onDishSelect(props.dish)}
                 onClick={props.onDishSelect}
@@ -29,4 +36,4 @@ const MenuItem = (props) => {
     )
 }
 
-export default MenuItem
+export default connect(mapStateToProps)(MenuItem)

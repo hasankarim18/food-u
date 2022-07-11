@@ -1,12 +1,26 @@
 import React from 'react'
 import dateFormat from "dateformat";
 import classes from './LoadComments.module.css'
+import { connect } from 'react-redux'
+import { Alert } from 'reactstrap'
+
+const mapStateToProps = state => {
+    return {
+        commentLoadFailed: state.comments.commentLoadFailed
+    }
+}
 
 const LoadComments = (props) => {
 
     return (
         <div className={classes['load-comments']} >
             <h3>Comments:</h3>
+            {
+                props.commentLoadFailed ?
+                    <Alert > <h5>Comment Loading failed</h5> </Alert>
+                    :
+                    ''
+            }
             {
                 props.comments.map(item => {
                     return (
@@ -35,4 +49,4 @@ const LoadComments = (props) => {
     )
 }
 
-export default LoadComments
+export default connect(mapStateToProps)(LoadComments)

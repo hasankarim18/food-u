@@ -4,6 +4,7 @@ import DishDetail from './DishDetail'
 import Loading from './Loading'
 import { connect } from 'react-redux/es/exports'
 import { addComment, fetchDishes, fetchComments, loadSelectedCommentsId } from '../../redux/actionCreators'
+import { Alert } from 'reactstrap'
 
 
 const mapStateToProps = state => {
@@ -13,6 +14,8 @@ const mapStateToProps = state => {
         comments: state.comments.comments,
         dishIsLaoding: state.dishes.dishIsLaoding,
         commentIsLoading: state.comments.commentIsLoading,
+        dishFailed: state.dishes.dishLoadingFailed,
+        dishErrMsg: state.dishes.dishErrMsg
     }
 }
 
@@ -103,6 +106,9 @@ export class Menu extends Component {
 
         return (
             <div className="row pt-2">
+                {
+                    this.props.dishFailed ? <Alert color="warning" > <h3>{this.props.dishErrMsg}</h3> </Alert> : ''
+                }
 
                 {menu}
 

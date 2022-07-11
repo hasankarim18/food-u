@@ -21,6 +21,14 @@ const dishLoading = () => {
     }
 }
 
+const dishFailed = (errMsg) => {
+    return {
+        type: actions.DISH_FAILED,
+        payload: errMsg
+
+    }
+}
+
 export const fetchDishes = () => {
     return dispatch => {
         dispatch(dishLoading())
@@ -32,7 +40,10 @@ export const fetchDishes = () => {
                 }
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                dispatch(dishFailed(err.message))
+            })
     }
 }
 
@@ -59,17 +70,25 @@ export const loadSelectedCommentsId = dishId => {
     }
 }
 
+const commentsLoadFailed = errMsg => {
+    return {
+        type: actions.COMMENT_LOADING_FAILED,
+        payload: errMsg
+    }
+}
+
 export const fetchComments = () => {
     return dispatch => {
         dispatch(commentsLoading())
 
 
-        axios.get(url.comments)
+        axios.get(url.commentsGit)
             .then(res => {
                 dispatch(loadComments(res.data))
             })
             .catch(err => {
                 console.log(err)
+                dispatch(commentsLoadFailed(err.message))
             })
     }
 }
@@ -82,16 +101,23 @@ const commentConcat = comment => {
     }
 }
 
+const addCommentFailed = errMsg => {
+    return {
+        type: actions.NEW_COMMENT_FAILED,
+        payload: errMsg
+    }
+}
+
 export const addComment = (comment) => dispatch => {
 
-    axios.post(url.comments, comment)
+    axios.post(url.commentsGit, comment)
         .then(res => res.data)
         .then(data => {
             dispatch(commentConcat(data))
         })
         .catch(err => {
-            console.log(err)
-        })
 
+            dispatch(addCommentFailed(err.message))
+        })
 
 }

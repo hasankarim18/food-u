@@ -7,13 +7,17 @@ import { combineReducers } from 'redux'
 
 const commentState = {
     comments: [],
-    commentIsLoading: false
+    commentIsLoading: false,
+    commentLoadFailed: false,
+    newCommentFailed: false
 
 }
 
 const dishState = {
     dishes: [],
-    dishIsLaoding: false
+    dishIsLaoding: false,
+    dishLoadingFailed: false,
+    dishErrMsg: null
 }
 
 const commentReducer = (state = commentState, action) => {
@@ -41,6 +45,13 @@ const commentReducer = (state = commentState, action) => {
                 commentIsLoading: false,
                 comments: action.payload
 
+            }
+        case actions.NEW_COMMENT_FAILED:
+            return {
+                ...state,
+                commentIsLoading: false,
+                comments: [],
+                newCommentFailed: true
             }
         case actions.NEW_COMMENT:
             let comment = action.payload
@@ -72,6 +83,14 @@ const dishReducer = (state = dishState, action) => {
                 ...state,
                 dishIsLaoding: false,
                 dishes: action.payload
+            }
+        case actions.DISH_FAILED:
+            return {
+                ...state,
+                dishIsLaoding: false,
+                dishes: [],
+                dishLoadingFailed: true,
+                dishErrMsg: action.payload
             }
         default:
             return state
