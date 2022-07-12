@@ -39,7 +39,7 @@ const Caurosel = (props) => {
                 props.slides.map((item, index) => {
                     return (
                         <div className={index === current ? 'slide active' : 'slide'} key={index} >
-                            {index === current && (<img src={item.image} alt='travel image' className="image" />)}
+                            {index === current && (<img src={item.image} alt='restaurent image' className="image" />)}
                         </div>
                     )
 
