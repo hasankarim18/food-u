@@ -7,7 +7,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 const Body = () => {
     return (
-        <div className="container">
+        <div className="">
             <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/menu" element={<Menu />} />

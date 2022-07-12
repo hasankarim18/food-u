@@ -121,3 +121,41 @@ export const addComment = (comment) => dispatch => {
         })
 
 }
+
+
+const slidesIsLoading = () => {
+    return {
+        type: actions.LOADING_SLIDER
+    }
+}
+
+const slidesLoad = (slides) => {
+    return {
+        type: actions.LOAD_SLIDER,
+        payload: slides
+    }
+}
+
+
+const slidesLoadFailed = (errMsg) => {
+    return {
+        type: actions.LOADING_SLIDER_FAILED,
+        payload: errMsg
+    }
+}
+
+
+export const fetchSlider = () => dispatch => {
+
+    dispatch(slidesIsLoading())
+
+    axios.get(url.slider)
+        .then(res => res.data)
+        .then(data => {
+            dispatch(slidesLoad(data))
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(slidesLoadFailed(err.message))
+        })
+}

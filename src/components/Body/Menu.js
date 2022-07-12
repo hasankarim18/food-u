@@ -105,16 +105,17 @@ export class Menu extends Component {
 
 
         return (
-            <div className="row pt-2">
-                {
-                    this.props.dishFailed ? <Alert color="warning" > <h3>{this.props.dishErrMsg}</h3> </Alert> : ''
-                }
+            <div className="container" >
+                <div className="row pt-2">
+                    {
+                        this.props.dishFailed ? <Alert color="warning" > <h3>{this.props.dishErrMsg}</h3> </Alert> : ''
+                    }
 
-                {menu}
+                    {menu}
 
-                {this.state.showDishDetail ? dishDetail : ''}
+                    {this.state.showDishDetail ? dishDetail : ''}
+                </div>
             </div>
-
         )
     }
 }

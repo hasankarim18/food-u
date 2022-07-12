@@ -20,6 +20,8 @@ const dishState = {
     dishErrMsg: null
 }
 
+
+
 const commentReducer = (state = commentState, action) => {
     // console.log(action)
     switch (action.type) {
@@ -98,10 +100,54 @@ const dishReducer = (state = dishState, action) => {
 
 }
 
+const slideState = {
+    slides: [],
+    isSlideLoading: true,
+    slideLoadingFailed: false,
+    slideLoadingErrMess: null
+}
+
+const sliderReducer = (state = slideState, action) => {
+
+    switch (action.type) {
+        case actions.LOADING_SLIDER:
+            return {
+                ...state,
+                slides: [],
+                isSlideLoading: true,
+                slideLoadingErrMess: null,
+                slideLoadingFailed: false
+            }
+        case actions.LOAD_SLIDER:
+            return {
+                ...state,
+                slides: action.payload,
+                isSlideLoading: false,
+                slideLoadingErrMess: null,
+                slideLoadingFailed: false
+            }
+        case actions.LOADING_SLIDER_FAILED:
+            console.log('reducer slide failed', action.payload)
+            return {
+                ...state,
+                slides: [],
+                isSlideLoading: false,
+                slideLoadingErrMess: action.payload,
+                slideLoadingFailed: true
+            }
+
+
+        default:
+            return state
+    }
+
+}
+
 
 const Reducer = combineReducers({
     comments: commentReducer,
-    dishes: dishReducer
+    dishes: dishReducer,
+    slider: sliderReducer
 
 })
 

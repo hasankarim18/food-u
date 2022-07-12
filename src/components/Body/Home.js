@@ -1,18 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Loading from './Loading'
 import Caurosel from '../UI/Caurosel'
-import { CauroselData } from '../UI/CauroselData'
+import { connect } from 'react-redux'
+import { fetchSlider } from '../../redux/actionCreators'
+import { Alert } from 'reactstrap'
+
+const mapStateToProps = state => {
+
+    return {
+        slides: state.slider.slides,
+        isSlideLoading: state.slider.isSlideLoading,
+        slideLoadingErrMess: state.slider.slideLoadingErrMess,
+        slideLoadingFailed: state.slider.slideLoadingFailed
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchSlider: () => dispatch(fetchSlider())
+    }
+}
 
 
 
-const Home = () => {
+const Home = (props) => {
+
+    useEffect(() => {
+        props.fetchSlider()
+    }, [])
+
+    const slideList = props.slides
+
+    let showCaurosel = null
+
+    if (props.isSlideLoading) {
+        showCaurosel = <Loading />
+    } else if (props.slideLoadingFailed) {
+
+        showCaurosel = <div className="container">
+            <Alert color="warning" > <h4>{props.slideLoadingErrMess}</h4> </Alert>
+        </div>
+    } else {
+        showCaurosel = <Caurosel slides={slideList} />
+    }
+
     return (
         <div style={{ paddingTop: "60px" }} >
 
-            <Caurosel slides={CauroselData} />
+            {showCaurosel}
 
         </div>
     )
 }
 
-export default Home
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
