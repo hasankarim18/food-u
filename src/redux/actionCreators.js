@@ -94,7 +94,7 @@ export const fetchComments = () => {
 }
 
 
-const commentConcat = comment => {
+const commentConcat = (comment) => {
     return {
         type: actions.NEW_COMMENT,
         payload: comment
@@ -108,15 +108,24 @@ const addCommentFailed = errMsg => {
     }
 }
 
+const newCommentAdding = () => {
+    return {
+        type: actions.NEW_COMMENT_ADDING
+    }
+}
+
+
+
 export const addComment = (comment) => dispatch => {
+    dispatch(newCommentAdding())
 
     axios.post(url.commentsGit, comment)
         .then(res => res.data)
         .then(data => {
             dispatch(commentConcat(data))
+
         })
         .catch(err => {
-
             dispatch(addCommentFailed(err.message))
         })
 

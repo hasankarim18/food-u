@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Alert } from 'reactstrap'
-import axios from 'axios'
+
 import { connect } from 'react-redux'
+import Spinner from '../UI/Spinner'
 
 const mapStateToProps = state => {
     //  console.log(state)
     return {
-        newCommentFailed: state.comments.newCommentFailed
+        newCommentFailed: state.comments.newCommentFailed,
+        newCommentAdding: state.comments.newCommentAdding,
+        clearForm: state.comments.clearForm
     }
 }
 
@@ -32,18 +35,11 @@ export class CommentForm extends Component {
 
         comment.dishId = this.props.dishId
         comment.date = new Date().toISOString()
-
         this.props.addComment(comment)
 
-        this.setState({
-            newComment: {
-                author: '',
-                rating: '',
-                comment: ''
-            }
-        })
-
     }
+
+
 
     onChangeHandler = event => {
         this.setState({
@@ -62,6 +58,7 @@ export class CommentForm extends Component {
 
         return (
             <div>
+
                 <Form onSubmit={this.onSubmitHandler} >
                     <Input
                         type='text'
@@ -92,8 +89,22 @@ export class CommentForm extends Component {
                         onChange={this.onChangeHandler}
                     />
                     <br />
-                    <Button className="btn-success" type='submit' >Submit Comment</Button>
+                    <Button className="btn-success" type='submit' >
+                        <div className="d-flex align-items-center justify-content-between" >
+                            <span className="m-1" >Submit Comment</span>
+                            {
+                                this.props.newCommentAdding ?
+                                    <Spinner
+                                        size="2x"
+                                        className="text-warning ms-2" />
+                                    : ''
+                            }
+
+                        </div>
+
+                    </Button>
                 </Form>
+
                 {
                     this.props.newCommentFailed ?
                         <Alert color="danger" ><h1>Submit failed</h1> </Alert>

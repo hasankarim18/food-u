@@ -9,7 +9,9 @@ const commentState = {
     comments: [],
     commentIsLoading: false,
     commentLoadFailed: false,
-    newCommentFailed: false
+    newCommentFailed: false,
+    newCommentAdding: false,
+    clearForm: false
 
 }
 
@@ -63,7 +65,19 @@ const commentReducer = (state = commentState, action) => {
 
             return {
                 ...state,
-                comments: totalComment
+                comments: totalComment,
+                newCommentAdding: false,
+                clearForm: true
+            }
+        case actions.NEW_COMMENT_ADDING:
+            return {
+                ...state,
+                newCommentAdding: true,
+            }
+        case actions.CLEAR_FORM:
+            return {
+                ...state,
+                clearForm: true
             }
         default:
             return state
